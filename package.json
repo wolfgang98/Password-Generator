@@ -1,0 +1,42 @@
+{
+  "name": "password",
+  "description": "password generator",
+  "version": "0.1.0",
+  "author": "Schuchter W.",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "build",
+    "preelectron-pack": "yarn build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "w.schuchter.id",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1",
+    "electron": "^2.0.6",
+    "electron-builder": "^20.26.1",
+    "wait-on": "^2.1.0"
+  }
+}

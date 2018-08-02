@@ -1,0 +1,8 @@
+version: 0.1.0
+files:
+  - url: password-setup-0.1.0.exe
+    sha512: JIwCskuEDB72tUOle20Maxhl2b2i3XqAp2n3MVKZrTZHFhykJETGmYzh77DLIt1U4i31hSHGgXROB0+cG4BubQ==
+    size: 48286401
+path: password-setup-0.1.0.exe
+sha512: JIwCskuEDB72tUOle20Maxhl2b2i3XqAp2n3MVKZrTZHFhykJETGmYzh77DLIt1U4i31hSHGgXROB0+cG4BubQ==
+releaseDate: '2018-08-02T17:21:50.831Z'
