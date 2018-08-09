@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import {oneLineTrim} from 'common-tags';
 
-const charsets = [
-  { key: "letters", value: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", weight: 1 },
-  { key: "digits", value: "0123456789", weight: 0.5 },
-  { key: "specials", value: "!?", weight: 0.2 },
-]
+const charsets = {
+  letters: { value: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", weight: 1 },
+  digits: { value: "0123456789", weight: 0.5 },
+  specials: { value: "!?", weight: 0.2 },
+}
 
 class App extends Component {
   constructor(props) {
@@ -37,26 +37,27 @@ class App extends Component {
   }
   genPassword() {
     const {hotelname, plz} = this.state
+    const {letters, digits, specials} = charsets
 
     return oneLineTrim`
-      ${this.genPassPhrase(1)}
+      ${this.genPassPhrase(1, [letters, digits, specials])}
       ${this.randomizeSensitivity(hotelname)}
-      ${this.genPassPhrase(1)}
+      ${this.genPassPhrase(1, [letters, specials])}
       ${plz.substr(0, Math.round(plz.length/2))}
-      ${this.genPassPhrase(1)}
+      ${this.genPassPhrase(1, [letters, specials])}
       ${plz.substr(Math.floor(plz.length/2), Math.floor(plz.length/2))}
-      ${this.genPassPhrase(1)}
+      ${this.genPassPhrase(1, [letters, specials])}
     `
   }
-  genPassPhrase(length) {
+  genPassPhrase(length, csets) {
 	  let phrase = '';
 	  for (let i=0; i < length; i++) {
 		  const rdm = Math.random();
-		  let charset;
-		  for (let set of charsets) {
-  			if (rdm < set.weight) charset = set;
+		  let cset;
+		  for (let set of csets) {
+  			if (rdm < set.weight) cset = set;
       }
-		  phrase += charset.value.charAt(Math.floor(Math.random() * charset.value.length));
+		  phrase += cset.value.charAt(Math.floor(Math.random() * cset.value.length));
     }
 	  return phrase;
   }

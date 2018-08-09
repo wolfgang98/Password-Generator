@@ -1,7 +1,7 @@
 {
   "name": "password",
   "description": "password generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Schuchter W.",
   "private": true,
   "main": "public/electron.js",
