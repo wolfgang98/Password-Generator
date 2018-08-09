@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {oneLineTrim} from 'common-tags';
 
 const charsets = [
   { key: "letters", value: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", weight: 1 },
@@ -35,13 +36,17 @@ class App extends Component {
     event.preventDefault();
   }
   genPassword() {
-    let password = '';
-    password += this.genPassPhrase(4);
-    password += this.state.hotelname;
-    password += this.genPassPhrase(4);
-    password += this.state.plz;
-    password += this.genPassPhrase(4);
-    return password;
+    const {hotelname, plz} = this.state
+
+    return oneLineTrim`
+      ${this.genPassPhrase(1)}
+      ${this.randomizeSensitivity(hotelname)}
+      ${this.genPassPhrase(1)}
+      ${plz.substr(0, Math.round(plz.length/2))}
+      ${this.genPassPhrase(1)}
+      ${plz.substr(Math.floor(plz.length/2), Math.floor(plz.length/2))}
+      ${this.genPassPhrase(1)}
+    `
   }
   genPassPhrase(length) {
 	  let phrase = '';
@@ -54,6 +59,14 @@ class App extends Component {
 		  phrase += charset.value.charAt(Math.floor(Math.random() * charset.value.length));
     }
 	  return phrase;
+  }
+  randomizeSensitivity(input) {
+    return input.split('').map((i) => {
+			if (Math.round(Math.random())) {
+        return i.toUpperCase()
+      }
+			return i.toLowerCase()
+    }).join('')
   }
   render() {
     return (

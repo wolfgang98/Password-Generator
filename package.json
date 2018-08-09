@@ -28,6 +28,7 @@
     }
   },
   "dependencies": {
+    "common-tags": "^1.8.0",
     "electron-is-dev": "^0.3.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
